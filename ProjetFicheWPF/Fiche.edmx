@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="fiche_revisionModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="acheter">
+          <Key>
+            <PropertyRef Name="numMedecin" />
+            <PropertyRef Name="idFiche" />
+          </Key>
+          <Property Name="numMedecin" Type="int" Nullable="false" />
+          <Property Name="idFiche" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fiche">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codeTheme" Type="int" Nullable="false" />
+          <Property Name="titre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="note" Type="double" />
+          <Property Name="prix" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="medecin">
+          <Key>
+            <PropertyRef Name="matricule" />
+          </Key>
+          <Property Name="matricule" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStatut" Type="int" Nullable="false" />
+          <Property Name="idSpecialite" Type="int" Nullable="false" />
+          <Property Name="nomMedecin" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="prenomMedecin" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="mdp" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="specialite">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="statut">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="theme_fiche">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomTheme" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="acheter_ibfk_1">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="1" />
+          <End Role="acheter" Type="Self.acheter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="matricule" />
+            </Principal>
+            <Dependent Role="acheter">
+              <PropertyRef Name="numMedecin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="acheter_ibfk_2">
+          <End Role="fiche" Type="Self.fiche" Multiplicity="1" />
+          <End Role="acheter" Type="Self.acheter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fiche">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="acheter">
+              <PropertyRef Name="idFiche" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fiche_ibfk_1">
+          <End Role="theme_fiche" Type="Self.theme_fiche" Multiplicity="1" />
+          <End Role="fiche" Type="Self.fiche" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="theme_fiche">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="fiche">
+              <PropertyRef Name="codeTheme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="medecin_ibfk_1">
+          <End Role="specialite" Type="Self.specialite" Multiplicity="1" />
+          <End Role="medecin" Type="Self.medecin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="specialite">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="medecin">
+              <PropertyRef Name="idSpecialite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="medecin_ibfk_2">
+          <End Role="statut" Type="Self.statut" Multiplicity="1" />
+          <End Role="medecin" Type="Self.medecin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statut">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="medecin">
+              <PropertyRef Name="idStatut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="fiche_revisionModelStoreContainer">
+          <EntitySet Name="acheter" EntityType="Self.acheter" Schema="fiche_revision" store:Type="Tables" />
+          <EntitySet Name="fiche" EntityType="Self.fiche" Schema="fiche_revision" store:Type="Tables" />
+          <EntitySet Name="medecin" EntityType="Self.medecin" Schema="fiche_revision" store:Type="Tables" />
+          <EntitySet Name="specialite" EntityType="Self.specialite" Schema="fiche_revision" store:Type="Tables" />
+          <EntitySet Name="statut" EntityType="Self.statut" Schema="fiche_revision" store:Type="Tables" />
+          <EntitySet Name="theme_fiche" EntityType="Self.theme_fiche" Schema="fiche_revision" store:Type="Tables" />
+          <AssociationSet Name="acheter_ibfk_1" Association="Self.acheter_ibfk_1">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="acheter" EntitySet="acheter" />
+          </AssociationSet>
+          <AssociationSet Name="acheter_ibfk_2" Association="Self.acheter_ibfk_2">
+            <End Role="fiche" EntitySet="fiche" />
+            <End Role="acheter" EntitySet="acheter" />
+          </AssociationSet>
+          <AssociationSet Name="fiche_ibfk_1" Association="Self.fiche_ibfk_1">
+            <End Role="theme_fiche" EntitySet="theme_fiche" />
+            <End Role="fiche" EntitySet="fiche" />
+          </AssociationSet>
+          <AssociationSet Name="medecin_ibfk_1" Association="Self.medecin_ibfk_1">
+            <End Role="specialite" EntitySet="specialite" />
+            <End Role="medecin" EntitySet="medecin" />
+          </AssociationSet>
+          <AssociationSet Name="medecin_ibfk_2" Association="Self.medecin_ibfk_2">
+            <End Role="statut" EntitySet="statut" />
+            <End Role="medecin" EntitySet="medecin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="fiche_revisionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="fiche">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codeTheme" Type="Int32" Nullable="false" />
+          <Property Name="titre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="note" Type="Double" />
+          <Property Name="prix" Type="Double" Nullable="false" />
+          <NavigationProperty Name="theme_fiche" Relationship="Self.fiche_ibfk_1" FromRole="fiche" ToRole="theme_fiche" />
+          <NavigationProperty Name="medecin" Relationship="Self.acheter" FromRole="fiche" ToRole="medecin" />
+        </EntityType>
+        <EntityType Name="medecin">
+          <Key>
+            <PropertyRef Name="matricule" />
+          </Key>
+          <Property Name="matricule" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStatut" Type="Int32" Nullable="false" />
+          <Property Name="idSpecialite" Type="Int32" Nullable="false" />
+          <Property Name="nomMedecin" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenomMedecin" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mdp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="specialite" Relationship="Self.medecin_ibfk_1" FromRole="medecin" ToRole="specialite" />
+          <NavigationProperty Name="statut" Relationship="Self.medecin_ibfk_2" FromRole="medecin" ToRole="statut" />
+          <NavigationProperty Name="fiche" Relationship="Self.acheter" FromRole="medecin" ToRole="fiche" />
+        </EntityType>
+        <EntityType Name="specialite">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="medecin" Relationship="Self.medecin_ibfk_1" FromRole="specialite" ToRole="medecin" />
+        </EntityType>
+        <EntityType Name="statut">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="medecin" Relationship="Self.medecin_ibfk_2" FromRole="statut" ToRole="medecin" />
+        </EntityType>
+        <EntityType Name="theme_fiche">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomTheme" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="fiche" Relationship="Self.fiche_ibfk_1" FromRole="theme_fiche" ToRole="fiche" />
+        </EntityType>
+        <Association Name="fiche_ibfk_1">
+          <End Role="theme_fiche" Type="Self.theme_fiche" Multiplicity="1" />
+          <End Role="fiche" Type="Self.fiche" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="theme_fiche">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="fiche">
+              <PropertyRef Name="codeTheme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="medecin_ibfk_1">
+          <End Role="specialite" Type="Self.specialite" Multiplicity="1" />
+          <End Role="medecin" Type="Self.medecin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="specialite">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="medecin">
+              <PropertyRef Name="idSpecialite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="medecin_ibfk_2">
+          <End Role="statut" Type="Self.statut" Multiplicity="1" />
+          <End Role="medecin" Type="Self.medecin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statut">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="medecin">
+              <PropertyRef Name="idStatut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="acheter">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="*" />
+          <End Role="fiche" Type="Self.fiche" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="fiche_revisionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="fiche" EntityType="Self.fiche" />
+          <EntitySet Name="medecin" EntityType="Self.medecin" />
+          <EntitySet Name="specialite" EntityType="Self.specialite" />
+          <EntitySet Name="statut" EntityType="Self.statut" />
+          <EntitySet Name="theme_fiche" EntityType="Self.theme_fiche" />
+          <AssociationSet Name="fiche_ibfk_1" Association="Self.fiche_ibfk_1">
+            <End Role="theme_fiche" EntitySet="theme_fiche" />
+            <End Role="fiche" EntitySet="fiche" />
+          </AssociationSet>
+          <AssociationSet Name="medecin_ibfk_1" Association="Self.medecin_ibfk_1">
+            <End Role="specialite" EntitySet="specialite" />
+            <End Role="medecin" EntitySet="medecin" />
+          </AssociationSet>
+          <AssociationSet Name="medecin_ibfk_2" Association="Self.medecin_ibfk_2">
+            <End Role="statut" EntitySet="statut" />
+            <End Role="medecin" EntitySet="medecin" />
+          </AssociationSet>
+          <AssociationSet Name="acheter" Association="Self.acheter">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="fiche" EntitySet="fiche" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="fiche_revisionModelStoreContainer" CdmEntityContainer="fiche_revisionEntities">
+          <EntitySetMapping Name="fiche">
+            <EntityTypeMapping TypeName="fiche_revisionModel.fiche">
+              <MappingFragment StoreEntitySet="fiche">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="codeTheme" ColumnName="codeTheme" />
+                <ScalarProperty Name="titre" ColumnName="titre" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medecin">
+            <EntityTypeMapping TypeName="fiche_revisionModel.medecin">
+              <MappingFragment StoreEntitySet="medecin">
+                <ScalarProperty Name="matricule" ColumnName="matricule" />
+                <ScalarProperty Name="idStatut" ColumnName="idStatut" />
+                <ScalarProperty Name="idSpecialite" ColumnName="idSpecialite" />
+                <ScalarProperty Name="nomMedecin" ColumnName="nomMedecin" />
+                <ScalarProperty Name="prenomMedecin" ColumnName="prenomMedecin" />
+                <ScalarProperty Name="mdp" ColumnName="mdp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="specialite">
+            <EntityTypeMapping TypeName="fiche_revisionModel.specialite">
+              <MappingFragment StoreEntitySet="specialite">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statut">
+            <EntityTypeMapping TypeName="fiche_revisionModel.statut">
+              <MappingFragment StoreEntitySet="statut">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="theme_fiche">
+            <EntityTypeMapping TypeName="fiche_revisionModel.theme_fiche">
+              <MappingFragment StoreEntitySet="theme_fiche">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="nomTheme" ColumnName="nomTheme" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="acheter" TypeName="fiche_revisionModel.acheter" StoreEntitySet="acheter">
+            <EndProperty Name="medecin">
+              <ScalarProperty Name="matricule" ColumnName="numMedecin" />
+            </EndProperty>
+            <EndProperty Name="fiche">
+              <ScalarProperty Name="id" ColumnName="idFiche" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
