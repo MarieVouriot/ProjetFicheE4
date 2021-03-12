@@ -4,16 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="191a3b1e98c84f51bc533904be8d899d" Name="Diagram1">
-        <EntityTypeShape EntityType="fiche_revisionModel.fiche" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="fiche_revisionModel.medecin" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="fiche_revisionModel.specialite" Width="1.5" PointX="0.875" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="fiche_revisionModel.statut" Width="1.5" PointX="0.875" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="fiche_revisionModel.theme_fiche" Width="1.5" PointX="8.125" PointY="1.5" IsExpanded="true" />
+      <Diagram DiagramId="ba7c5d5a558f4c939504cc12c20a0372" Name="Diagram1">
+        <EntityTypeShape EntityType="fiche_revisionModel.acheter" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="fiche_revisionModel.etudiant" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="fiche_revisionModel.fiche" Width="1.5" PointX="7.375" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="fiche_revisionModel.specialite" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="fiche_revisionModel.statut" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="fiche_revisionModel.theme_fiche" Width="1.5" PointX="9.875" PointY="1.625" IsExpanded="true" />
+        <AssociationConnector Association="fiche_revisionModel.acheter_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="fiche_revisionModel.acheter_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="fiche_revisionModel.etudiant_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="fiche_revisionModel.etudiant_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="fiche_revisionModel.fiche_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="fiche_revisionModel.medecin_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="fiche_revisionModel.medecin_ibfk_2" ManuallyRouted="false" />
-        <AssociationConnector Association="fiche_revisionModel.acheter" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -19,9 +19,50 @@ namespace ProjetFicheWPF
     /// </summary>
     public partial class frmUtilisateur : Window
     {
-        public frmUtilisateur()
+        fiche_revisionEntities gst;
+        public frmUtilisateur(fiche_revisionEntities unGst)
         {
             InitializeComponent();
+            gst = unGst;
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cboTheme.ItemsSource = gst.theme_fiche.ToList();
+            lvFiches.ItemsSource = gst.fiche.ToList();
+
+        }
+
+        private void cboTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(cboTheme.SelectedItem != null)
+            {
+                int numTheme = (cboTheme.SelectedItem as theme_fiche).code;
+
+                var ficheParTheme = from fi in gst.fiche
+                                    where fi.codeTheme == numTheme
+                                    select new fiche()
+                                    {
+                                        id = fi.id,
+                                        titre = fi.titre,
+                                        note = fi.note,
+                                        prix = fi.prix
+                                    };
+                lvFiches.ItemsSource = ficheParTheme.ToList();
+
+            }
+        }
+
+        private void lvFiches_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnCreer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
     }
 }

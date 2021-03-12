@@ -57,21 +57,21 @@ namespace ProjetFicheWPF
                     }
                     else
                     {
-                        medecin unMedecin = gst.medecin.ToList().Find(med => med.nomMedecin == txtNom.Text && med.prenomMedecin == txtPrenom.Text && med.mdp == txtMdp.Text);
-                        if(unMedecin == null)
+                        etudiant unEtudiant = gst.etudiant.ToList().Find(med => med.nomEtudiant == txtNom.Text && med.prenomEtudiant == txtPrenom.Text && med.mdp == txtMdp.Text);
+                        if(unEtudiant == null)
                         {
                             txtMessageErreur.Text = "Vos identifiants sont incorrects";
                         }
                         else
                         {
-                            if(unMedecin.idStatut == 1) // admin
+                            if(unEtudiant.idStatut == 1) // admin
                             {
                                 frmAdmin frm = new frmAdmin();
                                 frm.Show();
                             }
                             else // utilisateur
                             {
-                                frmUtilisateur frm = new frmUtilisateur();
+                                frmUtilisateur frm = new frmUtilisateur(gst);
                                 frm.Show();
                             }
                         }

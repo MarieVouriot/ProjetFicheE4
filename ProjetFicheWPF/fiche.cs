@@ -17,7 +17,7 @@ namespace ProjetFicheWPF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public fiche()
         {
-            this.medecin = new HashSet<medecin>();
+            this.acheter = new HashSet<acheter>();
         }
     
         public int id { get; set; }
@@ -26,8 +26,8 @@ namespace ProjetFicheWPF
         public Nullable<double> note { get; set; }
         public double prix { get; set; }
     
-        public virtual theme_fiche theme_fiche { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<medecin> medecin { get; set; }
+        public virtual ICollection<acheter> acheter { get; set; }
+        public virtual theme_fiche theme_fiche { get; set; }
     }
 }

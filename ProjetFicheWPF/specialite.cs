@@ -17,13 +17,13 @@ namespace ProjetFicheWPF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public specialite()
         {
-            this.medecin = new HashSet<medecin>();
+            this.etudiant = new HashSet<etudiant>();
         }
     
         public int code { get; set; }
         public string libelle { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<medecin> medecin { get; set; }
+        public virtual ICollection<etudiant> etudiant { get; set; }
     }
 }

@@ -12,24 +12,24 @@ namespace ProjetFicheWPF
     using System;
     using System.Collections.Generic;
     
-    public partial class medecin
+    public partial class etudiant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public medecin()
+        public etudiant()
         {
-            this.fiche = new HashSet<fiche>();
+            this.acheter = new HashSet<acheter>();
         }
     
         public int matricule { get; set; }
         public int idStatut { get; set; }
         public int idSpecialite { get; set; }
-        public string nomMedecin { get; set; }
-        public string prenomMedecin { get; set; }
+        public string nomEtudiant { get; set; }
+        public string prenomEtudiant { get; set; }
         public string mdp { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<acheter> acheter { get; set; }
         public virtual specialite specialite { get; set; }
         public virtual statut statut { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<fiche> fiche { get; set; }
     }
 }

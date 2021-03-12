@@ -5,8 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetFicheWPF"
         mc:Ignorable="d"
-        Title="frmUtilisateur" Height="450" Width="800">
+        Title="frmUtilisateur" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="110"></RowDefinition>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Thème des fiches : " FontSize="20" VerticalAlignment="Center"></TextBlock>
+            <ComboBox Name="cboTheme" Width="200" Height="25" Margin="15" HorizontalAlignment="Right" SelectionChanged="cboTheme_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding nomTheme}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Grid Grid.Row="1">
+                <ListView Name="lvFiches" FontSize="15" SelectionChanged="lvFiches_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Titre des fiches" Width="200" DisplayMemberBinding="{Binding titre}"></GridViewColumn>
+                            <GridViewColumn Header="Prix en €" Width="80" DisplayMemberBinding="{Binding prix}"></GridViewColumn>
+                            <GridViewColumn Header="Note" Width="80" DisplayMemberBinding="{Binding note}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button Name="btnCreer" Content="Créer une fiche" Margin="40" Background="AliceBlue" BorderBrush="Blue" Click="btnCreer_Click"></Button>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="180"></RowDefinition>
+                <RowDefinition ></RowDefinition>
+                <RowDefinition Height="110"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ListView Name="lvFichesSelectionnees" FontSize="15" Margin="30" BorderBrush="Black">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Titre des fiches" Width="230" DisplayMemberBinding="{Binding titre}"></GridViewColumn>
+                            <GridViewColumn Header="Prix en €" Width="100" DisplayMemberBinding="{Binding prix}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock Text="Total : " FontWeight="Bold" FontSize="20" Margin="30,0,20,50" VerticalAlignment="Top" Height="30"></TextBlock>
+                <Button Name="btnAcheter" Content="Acheter" Margin="40,10" VerticalAlignment="Bottom" Background="AliceBlue" BorderBrush="Blue"></Button>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button Name="btnFichePossedee" Content="Fiches possedees" Margin="40" Background="AliceBlue" BorderBrush="Blue"></Button>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

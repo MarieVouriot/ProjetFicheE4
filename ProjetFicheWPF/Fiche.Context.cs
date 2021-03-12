@@ -25,8 +25,9 @@ namespace ProjetFicheWPF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<acheter> acheter { get; set; }
+        public virtual DbSet<etudiant> etudiant { get; set; }
         public virtual DbSet<fiche> fiche { get; set; }
-        public virtual DbSet<medecin> medecin { get; set; }
         public virtual DbSet<specialite> specialite { get; set; }
         public virtual DbSet<statut> statut { get; set; }
         public virtual DbSet<theme_fiche> theme_fiche { get; set; }

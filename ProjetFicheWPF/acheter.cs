@@ -12,18 +12,13 @@ namespace ProjetFicheWPF
     using System;
     using System.Collections.Generic;
     
-    public partial class statut
+    public partial class acheter
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public statut()
-        {
-            this.etudiant = new HashSet<etudiant>();
-        }
+        public int numEtudiant { get; set; }
+        public int idFiche { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
     
-        public int code { get; set; }
-        public string libelle { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<etudiant> etudiant { get; set; }
+        public virtual etudiant etudiant { get; set; }
+        public virtual fiche fiche { get; set; }
     }
 }
